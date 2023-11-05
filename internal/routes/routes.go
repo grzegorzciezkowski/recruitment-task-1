@@ -2,11 +2,12 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"recruitment-task-1/internal/config"
 	"recruitment-task-1/internal/handlers"
 )
 
-func Routes(r *gin.Engine) error {
-	numbersHandlers, err := handlers.NewNumbersHandlers()
+func Routes(r *gin.Engine, cfg *config.Config) error {
+	numbersHandlers, err := handlers.NewNumbersHandlers(cfg.InputFile)
 	if err != nil {
 		return err
 	}
