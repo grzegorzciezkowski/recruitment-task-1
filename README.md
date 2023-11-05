@@ -44,3 +44,29 @@ An example file You can find here: `exampleconfiguration/config.yaml`
 # Logging
 I used multi-writer to keep logs in a file and on console output. I decided to keep logs in JSON format because in that
 format logs could be easily store in log storage. For example `Kibana`, `Splunk` etc.
+
+# Makefile
+## How to build project?
+To build project please run command:
+```shell
+make
+```
+It will create folder `target` with the compiled executable file, and it makes a copy of example configuration and put
+into that folder.
+
+To run a server you can run following command
+```shell
+cd target/ && ./server
+```
+
+## How to run tests?
+To run test You have to run following instruction: 
+```shell
+make test
+```
+
+## Clean build files
+To remove files You should run the following command:
+```shell
+make clean
+```
