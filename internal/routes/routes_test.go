@@ -11,7 +11,7 @@ func TestRoutes(t *testing.T) {
 	expectedRoutesInfo := gin.RoutesInfo{
 		gin.RouteInfo{
 			Method:  "GET",
-			Path:    "/healthcheck",
+			Path:    "/api/v1/healthcheck",
 			Handler: "recruitment-task-1/internal/handlers.Healthcheck",
 		},
 	}

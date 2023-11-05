@@ -27,6 +27,47 @@ func NewRepository(filePath string) (*Repository, error) {
 	return r, nil
 }
 
+func (r *Repository) FindIndex(number int) (int, int, error) {
+	index, ok := r.indexMap[number]
+	if ok {
+		return index, number, nil
+	}
+
+	minNumber := number * 90 / 100
+	maxNumber := number * 110 / 100
+
+	return r.findLevel10(minNumber, maxNumber, r.numbers)
+}
+
+func (r *Repository) findLevel10(min, max int, slice []int) (int, int, error) {
+	if len(slice) == 1 {
+		if isBetween(slice[0], min, max) {
+			return r.indexMap[slice[0]], slice[0], nil
+		} else {
+			return 0, -1, nil
+		}
+	}
+
+	if !isOverlappingRanges(slice[0], slice[len(slice)-1], min, max) {
+		return 0, -1, nil
+	}
+
+	index, number, _ := r.findLevel10(min, max, slice[:len(slice)/2])
+	if number != -1 {
+		return index, number, nil
+	}
+
+	return r.findLevel10(min, max, slice[len(slice)/2:])
+}
+
+func isOverlappingRanges(start1, end1, start2, end2 int) bool {
+	return start1 <= end2 && end1 >= start2
+}
+
+func isBetween(num, min, max int) bool {
+	return num >= min && num <= max
+}
+
 func (r *Repository) loadFile() error {
 	file, err := os.Open(r.filePath)
 	if err != nil {
