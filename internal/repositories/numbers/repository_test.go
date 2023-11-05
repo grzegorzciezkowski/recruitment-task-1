@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	correctFile   = "C:\\Users\\ledyb\\MyApps\\RecruitmentTask1\\recruitment-task-1\\workdir\\input.txt"
-	incorrectFile = "C:\\Users\\ledyb\\MyApps\\RecruitmentTask1\\recruitment-task-1\\input_incorrect_number.txt"
+	correctFile   = "../../../testdata/input.txt"
+	incorrectFile = "../../../testdata/input_incorrect_number.txt"
 )
 
 func TestNewRepository(t *testing.T) {
