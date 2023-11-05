@@ -14,6 +14,11 @@ func TestRoutes(t *testing.T) {
 			Path:    "/api/v1/healthcheck",
 			Handler: "recruitment-task-1/internal/handlers.Healthcheck",
 		},
+		gin.RouteInfo{
+			Method:  "GET",
+			Path:    "/api/v1/numbers/:value",
+			Handler: "recruitment-task-1/internal/handlers.(*NumbersHandlers).FindIndex-fm",
+		},
 	}
 
 	r := gin.Default()

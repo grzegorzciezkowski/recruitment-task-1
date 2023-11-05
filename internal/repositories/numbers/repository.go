@@ -27,10 +27,10 @@ func NewRepository(filePath string) (*Repository, error) {
 	return r, nil
 }
 
-func (r *Repository) FindIndex(number int) (int, int, error) {
+func (r *Repository) FindIndex(number int) (int, int, bool) {
 	index, ok := r.indexMap[number]
 	if ok {
-		return index, number, nil
+		return index, number, true
 	}
 
 	minNumber := number * 90 / 100
@@ -39,22 +39,22 @@ func (r *Repository) FindIndex(number int) (int, int, error) {
 	return r.findLevel10(minNumber, maxNumber, r.numbers)
 }
 
-func (r *Repository) findLevel10(min, max int, slice []int) (int, int, error) {
+func (r *Repository) findLevel10(min, max int, slice []int) (int, int, bool) {
 	if len(slice) == 1 {
 		if isBetween(slice[0], min, max) {
-			return r.indexMap[slice[0]], slice[0], nil
+			return r.indexMap[slice[0]], slice[0], true
 		} else {
-			return 0, -1, nil
+			return 0, -1, false
 		}
 	}
 
 	if !isOverlappingRanges(slice[0], slice[len(slice)-1], min, max) {
-		return 0, -1, nil
+		return 0, -1, false
 	}
 
-	index, number, _ := r.findLevel10(min, max, slice[:len(slice)/2])
-	if number != -1 {
-		return index, number, nil
+	index, number, ok := r.findLevel10(min, max, slice[:len(slice)/2])
+	if ok {
+		return index, number, true
 	}
 
 	return r.findLevel10(min, max, slice[len(slice)/2:])
