@@ -1,0 +1,5 @@
+port: 8080
+release_mode: true
+input_file: input.txt
+log_file: logfile.log
+log_level: debug

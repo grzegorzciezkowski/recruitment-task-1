@@ -8,7 +8,7 @@ import (
 type Config struct {
 	Port        string
 	ReleaseMode bool
-	InputFile   string `yaml:"input_file"`
+	InputFile   string
 	LogLevel    string
 	LogFile     string
 }
